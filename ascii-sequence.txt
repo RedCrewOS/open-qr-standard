@@ -1,0 +1,32 @@
+object Provider Consumer Display Authority
+
+Provider->Provider:Journey Initiated
+Provider->Display:QR Code Issued
+
+Provider->Display:New QR Code Issued
+
+Consumer->Display:QR Code Scanned
+Display->Consumer:Base path and ID extracted from QR code
+
+Consumer->Provider:Provider capabilities from discovery
+Provider->Consumer:Capabilities provided
+Consumer->Consumer:Ensure capabilities match
+Consumer->Consumer:Extract security configuration
+
+Consumer->Provider:Request details of session
+
+Provider->Consumer:Consumer capabilities from discovery
+
+Consumer->Provider:Capabilities provided
+
+Provider->Provider:Validate credentials based
+
+Provider->Authority:Validate the Consumer certification
+
+Provider->Consumer:Provide details of session
+
+Consumer->Consumer:Validate session type is supported
+
+Consumer->Provider:"Claim" session and provide details
+
+Provider->Consumer:Callback to indicate journey completion
