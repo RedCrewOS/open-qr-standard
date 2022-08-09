@@ -3,6 +3,8 @@
 
 A profile of the [Open QR Standard](../open-qr-standard.md) that defines the base end points and discovery fields that allow for Code Providers and Code Consumers to communicate and discover the capabilities and characteristics supported by both parties.
 
+Note that this profile should read as an addendum to the [Open QR Standard](../open-qr-standard.md) and inherits it's references and definitions.
+
 This profile MUST be supported by both Code Providers and Code Consumers.
 
 **DRAFT**: v1.0.0
@@ -15,7 +17,7 @@ This profile MUST be supported by both Code Providers and Code Consumers.
 
 ## Code Provider Discovery Document
 
-This section defines properties to be included in the Code Provider discovery document under the *Code Provider Profile URN*
+This section defines properties to be included in the Code Provider discovery document under the *Code Provider Profile URN*.
 
 The supported discovery properties are:
 
@@ -351,17 +353,45 @@ A static JSON resource used to obtain the keys required for authentication and e
 The JWKS endpoint for the Code Provider MUST include sufficient keys to accommodate the algorithms supported by the provider.
 
 
+## Code Consumer Discovery Document
 
+This section defines properties to be included in the Code Consumer discovery document under the *Code Consumer Profile URN*.
 
+The supported discovery properties are:
+
+| Property | Optionality | Description |
+|----------|-------------|-------------|
+|jwksUri|REQUIRED|URL of the JWKS endpoint for the Code Consumer.  MUST include appropriate keys to support the algorithms supported.|
+|signingAlgorithms|REQUIRED|JSON array containing a list of supported JWS [RFC7515] signing algorithms.  Values to be taken from the JWA standard [RFC7518].  Only asymmetric algorithms may be supported.|
+|encryptionAlgorithms|REQUIRED|JSON array containing a list of supported JWE [RFC7516] encryption algorithms.  Values to be taken from the JWA standard [RFC7518].  Only asymmetric algorithms may be supported.|
+|displayName|REQUIRED|The name of the Code Provider to use in display to an end user.|
+|description|OPTIONAL|A short sentence or paragraph describing the Code Provider to use in display to an end user.|
+|logoUri|OPTIONAL|URL to a logo for the Code Provider.  If present, MUST link to a PNG or JPEG image with maximum width of 250 pixels and maximum height of 150 pixels.|
+
+## Code Consumer Endpoints
+
+### JWKS Endpoint
+A static JSON resource used to obtain the keys required for authentication and encryption.  Defined according to [RFC7517].
+
+The JWKS endpoint for the Code Provider MUST include sufficient keys to accommodate the algorithms supported by the consumer.
+
+## Security Considerations
+
+When calling any authenticated endpoint hosted by either a Code Provider or a Code Consumer:
+
+* A token MUST be provided by the client in the Authorization header of the request
+* This token MUST be a signed and encrypted nested JSON Web Token as defined in [RFC7519]
+* The token MUST be signed using the private part of an asymmetric key held by the client with the public counterpart being made available via the client’s JWKS endpoint
+* The token MUST be encrypted using the public part of an asymmetric key obtained from the server’s JWKS endpoint
+* The client MUST select the algorithms for signing and encryption from those indicated as being supported by the server
+
+When an authenticated endpoint hosted by either a Code Provider or a Code Consumer is called the hosting system MUST decrypt and validate the signature of the nested JWT provided in the Authorization header.
 
 ## Normative References
 
 | Label | Reference |
 |-------|-----------|
 |[RFC2119]|Bradner, S, "Key words for use in RFCs to Indicate Requirement Levels", [RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119), March 1997.|
-|[ISO18004]|ISO/IEC JTC 1/SC 31, "ISO/IEC 18004:2015 Information technology - Automatic identification and data capture techniques - QR Code bar code symbology specification", [ISO/IEC 18004:2015](https://www.iso.org/standard/62021.html), February 2015.|
-|[RFC8529]|Bray, T., Ed., "The JavaScript Object Notation (JSON) Data Interchange Format", [RFC 8259](https://datatracker.ietf.org/doc/html/rfc8259), December 2017.|
-|[RFC7519]|Jones, M., Bradley, J., and N. Sakimura, “JSON Web Token (JWT)” [RFC 7519](https://datatracker.ietf.org/doc/html/rfc7519), May 2015.|
 |[RFC7515]|Jones, M., Bradley, J., and N. Sakimura, “JSON Web Signature (JWS),” [RFC 7515](https://datatracker.ietf.org/doc/html/rfc7515), May 2015.|
 |[RFC7516]|Jones, M., Hildebrand, J., “JSON Web Encryption (JWE),” [RFC 7516](https://datatracker.ietf.org/doc/html/rfc7516), May 2015.|
 |[RFC7517]|Jones, M., “JSON Web Key (JWK),” [RFC 7517](https://datatracker.ietf.org/doc/html/rfc7517), May 2015.|
