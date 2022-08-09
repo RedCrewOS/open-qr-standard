@@ -238,13 +238,9 @@ There is a core profile that is MUST be supported by both Code Providers and Cod
 
 Currently defined profiles:
 
-**[Core QR Profile definition](./profiles/core-profile.md)**
+* **[Core QR Profile definition](./profiles/core-profile.md)**<br/>Core profile that defines the base end points and discovery fields that allow for Code Providers and Code Consumers to communicate and discover the capabilities and characteristics supported by both parties.
 
-Core profile that defines the base end points and discovery fields that allow for Code Providers and Code Consumers to communicate and discover the capabilities and characteristics supported by both parties.
-
-**[Payment Profile](./profiles/payment-profile.md)**
-
-A profile that allows for a merchant to offer a payment that needs to be made that can then be claimed by a wallet to provide the payment method for the payment.  This profile is designed to support both online checkout and merchant point of sale scenarios.
+* **[Payment Profile](./profiles/payment-profile.md)**<br/>A profile that allows for a merchant to offer a payment that needs to be made that can then be claimed by a wallet to provide the payment method for the payment.  This profile is designed to support both online checkout and merchant point of sale scenarios.
 
 ## Normative References
 
@@ -263,4 +259,4 @@ A profile that allows for a merchant to offer a payment that needs to be made th
 
 | Label | Reference |
 |-------|-----------|
-|[json-schema]|Wright, A., Andrews, H., Hutton, B., and G. Dennis, "JSON Schema: A Media Type for Describing JSON Documents", draft-bhutton-json-schema-00 (work in progress), December 2020.|
+|[JSONSchema]|Wright, A., Andrews, H., Hutton, B., and G. Dennis, "JSON Schema: A Media Type for Describing JSON Documents", draft-bhutton-json-schema-00 (work in progress), December 2020.|
