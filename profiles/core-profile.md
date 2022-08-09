@@ -61,7 +61,7 @@ HTTP Status: 200
 
 Content-Type: application/json
 
-Successful Response Schema [JSONSchema]:
+Successful response schema [JSONSchema]:
 
 ```
 {
@@ -147,7 +147,7 @@ POST
 
 #### Request
 
-Request Schema [JSONSchema]:
+Request schema [JSONSchema]:
 
 ```
 {
@@ -216,7 +216,7 @@ HTTP Status: 200
 
 Content-Type: application/json
 
-Successful Response Schema [JSONSchema]:
+Successful response schema [JSONSchema]:
 
 ```
 {
@@ -294,7 +294,7 @@ HTTP Status: 200
 
 Content-Type: application/json
 
-Successful Response Schema [JSONSchema]:
+Successful response schema [JSONSchema]:
 
 ```
 {
