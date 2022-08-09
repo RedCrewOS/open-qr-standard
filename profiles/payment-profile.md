@@ -17,6 +17,14 @@ This profile is optional.
 
 **Code Consumer Profile URN**: `urn:cds-au:qr:pos-wallet:1`
 
+## Payment Instruments
+
+Note that a key feature of this profile is the concept of a *Payment Instrument*.  A Payment Instrument is constituted by a URN defining the type of the instrument and a set of data describing the instrument that matches a schema defined by the instrument originator.
+
+The intention is that payment processors and schemes will define a structure for a Payment Instrument that communicates to the provider the information needed to be able to obtain and use that instrument to execute a payment via a back channel process.  The actual back channel process is outside the scope of this standard.
+
+For instance, a token representing a Credit Card could be presented via this profile.  This token could then be exchanged, via a secure back channel defined by the instrument provider, for the actual Credit Card details.
+
 ## Code Provider Discovery Document
 
 This section defines properties to be included in the Code Provider discovery document under the *Code Provider Profile URN*.
