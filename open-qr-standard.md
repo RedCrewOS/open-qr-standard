@@ -1,10 +1,11 @@
 
 # Open QR Standard
 
-*An open standard for the publication of interoperable QR codes for payments and other use cases*
+**An open standard for the publication of interoperable QR codes for payments and other use cases**
 
-*DRAFT*: v0.1.0
-*Authors*:	James Bligh, Kareem Al-Bassam, Jack Moggach
+**DRAFT**: v0.1.0
+
+**Authors**:	James Bligh, Kareem Al-Bassam, Jack Moggach
 
 ## Abstract
 
@@ -28,7 +29,7 @@ The discovery mechanisms are generic and therefore allow the framework to be ext
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC2119].
 
 | Term | Definition |
-|+|+|
+|------|------------|
 |QR Code|A “quick response code” created according to [ISO18004].|
 |Code Provider|The system that represents the initiating side of the user journey.  This is the system that creates and publishes the QR Code.  For a point-of-sale payment this would be the merchant checkout system.|
 |Code Consumer|The system that represents the acceptance, or client, side of the user journey.  This is the system that scans and processes the QR Code.  For a point-of-sale payment this would be the customer’s mobile wallet application.|
@@ -107,7 +108,7 @@ An example sequence of activity supported by this standard is as follows:
       | Callback to indicate journey completion       |                                              |            |
       |---------------------------------------------->|                                              |            |
       |                                               |                                              |            |
-      ```
+```
 
 ## QR Code
 
