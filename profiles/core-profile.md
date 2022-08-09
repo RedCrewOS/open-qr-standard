@@ -37,7 +37,7 @@ The supported discovery properties are:
 
 An API used to obtain information about the session associated with a nominated QR ID.
 
-#### HTTP Method**
+#### HTTP Method
 
 GET
 
@@ -47,11 +47,17 @@ GET
 |-----------|-------------|-------------|
 |qr-id|REQUIRED|The QR ID that information is requested for.|
 
-#### Successful Response**
+#### Error Responses
 
-**HTTP Status**: 200
+HTTP Status: 401, Validation of the provided authorisation JWT failed
 
-**Content-Type**: application/json
+HTTP Status: 422, The provided QR ID is not known
+
+#### Successful Response
+
+HTTP Status: 200
+
+Content-Type: application/json
 
 Successful Response Schema [JSONSchema]:
 
@@ -122,6 +128,231 @@ Successful Response Schema [JSONSchema]:
    }
 }
 ```
+
+### Session Claim Endpoint
+
+An API used to claim a session under a specific QR Profile using a nominated QR ID.
+
+#### HTTP Method
+
+POST
+
+#### Query Parameters
+
+| Parameter | Optionality | Description |
+|-----------|-------------|-------------|
+|qr-id|REQUIRED|The QR ID that a session is to be claimed for.|
+
+#### Request
+
+Request Schema [JSONSchema]:
+
+```
+{
+   "$schema": "http://json-schema.org/draft-07/schema",
+   "$id": "https://cds-au/qr/core-provider/1/request/session/claim",
+   "type": "object",
+   "additionalProperties": false,
+   "required": [
+      "data",
+      "meta"
+   ],
+   "properties": {
+      "data": {
+         "type": "object",
+         "additionalProperties": true,
+         "required": [
+            "consumer",
+            "profiles"
+         ],
+         "properties": {
+            "consumer": {
+               "type": "string",
+               "description": "The unique identifier of the QR consumer.  This is defined as the base location where the discovery document can be found, i.e. ‘https://<consumer base>’"
+            },
+            "displayName": {
+               "type": "string",
+               "description": "An optional, short, display name of the consumer that can be presented to the customer by the provider"
+            },
+            "displayDescription": {
+               "type": "string",
+               "description": "An optional paragraph of text that can be displayed to the customer that describes the purpose of the consumer"
+            },
+            "profiles": {
+               "type": "object",
+               "description": "An object with details for each of the qr profiles supported by this qr-id.  Each property of this object uses the urn of the profile and contains properties defined by the qr profile that the urn denotes",
+               "additionalProperties": false,
+               "patternProperties": {
+                  "^urn:.*$": {
+                     "type": "object",
+                     "additionalProperties": true
+                  }
+               }
+            }
+         }
+      },
+      "meta": {
+         "type": "object",
+         "description": "Used to hold any additional meta data that the provider wishes to provide",
+         "additionalProperties": true
+      }
+   }
+}
+```
+
+#### Error Responses
+
+HTTP Status: 400, The specified QR Profile is not supported for this QR ID or the data provided was not valid
+
+HTTP Status: 401, Validation of the provided authorisation JWT failed
+
+HTTP Status: 422, The provided QR ID is not known
+
+#### Successful Response
+
+HTTP Status: 200
+
+Content-Type: application/json
+
+Successful Response Schema [JSONSchema]:
+
+```
+{
+   "$schema": "http://json-schema.org/draft-07/schema",
+   "$id": "https://cds-au/qr/core-provider/1/response/session/claim",
+   "type": "object",
+   "additionalProperties": false,
+   "required": [
+      "data",
+      "meta"
+   ],
+   "properties": {
+      "data": {
+         "type": "object",
+         "additionalProperties": true,
+         "required": [
+            "sessionId",
+            “provider”,
+            "profiles"
+         ],
+         "properties": {
+            "sessionId": {
+               "type": "string",
+               "description": "The session-id created by claiming the session.  This ID represents this claim event and must be unique.  Can be used for subsequent calls for status"
+            },
+            "provider": {
+               "type": "string",
+               "description": "The unique identifier of the code provider.  This is defined as the base location where the discovery document can be found, i.e. ‘https://<provider base>’"
+            },
+            "profiles": {
+               "type": "object",
+               "description": "An object with details for each of the qr profiles supported by this qr-id.  Each property of this object uses the urn of the profile and contains properties defined by the qr profile that the urn denotes",
+               "additionalProperties": false,
+               "patternProperties": {
+                  "^urn:.*$": {
+                     "type": "object",
+                     "additionalProperties": true
+                  }
+               }
+            }
+         }
+      },
+      "meta": {
+         "type": "object",
+         "description": "Used to hold any additional meta data that the provider wishes to provide",
+     	"additionalProperties": true
+      }
+   }
+}
+```
+
+### Session Status Endpoint
+
+An API used to obtain information about a specific session that was previously claimed.
+
+#### HTTP Method
+
+GET
+
+#### Query Parameters
+
+| Parameter | Optionality | Description |
+|-----------|-------------|-------------|
+|session-id|REQUIRED|The Session ID that information is requested for that was previously obtained from a call to the Session Claim endpoint.|
+
+#### Error Responses
+
+HTTP Status: 401, Validation of the provided authorisation JWT failed
+
+HTTP Status: 422, The provided QR ID is not known
+
+#### Successful Response
+
+HTTP Status: 200
+
+Content-Type: application/json
+
+Successful Response Schema [JSONSchema]:
+
+```
+{
+   "$schema": "http://json-schema.org/draft-07/schema",
+   "$id": "https://cds-au/qr/core-provider/1/response/session/status",
+   "type": "object",
+   "additionalProperties": false,
+   "required": [
+      "data",
+      "meta"
+   ],
+   "properties": {
+      "data": {
+         "type": "object",
+         "additionalProperties": true,
+         "required": [
+            "sessionId",
+            “provider”,
+            "profiles"
+         ],
+         "properties": {
+            "sessionId": {
+               "type": "string",
+               "description": "The session-id that the status has been requested for"
+            },
+            "provider": {
+               "type": "string",
+               "description": "The unique identifier of the code provider.  This is defined as the base location where the discovery document can be found, i.e. ‘https://<provider base>’"
+            },
+            "profiles": {
+               "type": "object",
+               "description": "An object with details for each of the qr profiles supported by this qr-id.  Each property of this object uses the urn of the profile and contains properties defined by the qr profile that the urn denotes",
+               "additionalProperties": false,
+               "patternProperties": {
+                  "^urn:.*$": {
+                     "type": "object",
+                     "additionalProperties": true
+                  }
+               }
+            }
+         }
+      },
+      "meta": {
+         "type": "object",
+         "description": "Used to hold any additional meta data that the provider wishes to provide",
+     	"additionalProperties": true
+      }
+   }
+}
+```
+
+### JWKS Endpoint
+
+A static JSON resource used to obtain the keys required for authentication and encryption.  Defined according to [RFC7517].
+
+The JWKS endpoint for the Code Provider MUST include sufficient keys to accommodate the algorithms supported by the provider.
+
+
+
+
 
 ## Normative References
 
