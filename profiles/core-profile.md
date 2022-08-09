@@ -37,17 +37,21 @@ The supported discovery properties are:
 
 An API used to obtain information about the session associated with a nominated QR ID.
 
-**HTTP Method**: GET
+#### HTTP Method**
 
-**Query Parameters**:
+GET
+
+#### Query Parameters
 
 | Parameter | Optionality | Description |
 |-----------|-------------|-------------|
 |qr-id|REQUIRED|The QR ID that information is requested for.|
 
-**Successful Response**:
-  **HTTP Status**: 200
-  **Content-Type**: application/json
+#### Successful Response**
+
+**HTTP Status**: 200
+
+**Content-Type**: application/json
 
 Successful Response Schema [JSONSchema]:
 
