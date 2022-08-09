@@ -37,7 +37,7 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 ## Generic Sequence Diagram
 
-An example sequence of activity supported by this standard is as follows:
+An example sequence of activity supported by this standard is as follows ([PNG version is here](./resources/sequence.png)):
 
 ```
 +-----------+                                   +-----------+                                   +---------+ +-----------+
@@ -252,6 +252,4 @@ Currently defined profiles:
 
 ## Informative References
 
-| Label | Reference |
-|-------|-----------|
-|[JSONSchema]|Wright, A., Andrews, H., Hutton, B., and G. Dennis, "JSON Schema: A Media Type for Describing JSON Documents", draft-bhutton-json-schema-00 (work in progress), December 2020.|
+None
