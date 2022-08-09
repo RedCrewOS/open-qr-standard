@@ -115,6 +115,7 @@ An example sequence of activity supported by this standard is as follows:
 The Code Provider will publish a QR Code that MUST conform with the requirements of [ISO18004].
 
 This QR Code MUST contain a URL in the following format:
+
 `https://<provider base>/<QR ID>`
 
 The Code Provider MUST provide a valid web page at the location specified by `<provider base>` with instructions for a user how the QR Code can be successfully used.
@@ -124,3 +125,142 @@ The `<QR ID>` is used to obtain access to a data entity held by the Code Provide
 Sessions MUST be single use.
 
 The Code Provider SHOULD superimpose a logo on the QR code to help Customers recognise trusted brands.  This logo SHOULD be tested to ensure the logo does not introduce too much error to the QR Code and the QR Code remains readable. In situations where the effect of scanning a QR code is unclear the Code Provider SHOULD provide guidance as to how the QR Code can be successfully used.
+
+## Session Actions
+
+The Code Provider MUST support a Session Info endpoint that the Code Consumer can call to obtain information about the session using the QR ID obtained from the QR Code.  This endpoint SHOULD be idempotent and should not have side effects on the underlying Session.
+
+The Code Provider MUST support a Session Claim endpoint that the Code Consumer can use to claim a session for use using a QR ID.  This endpoint MUST provide a unique Session ID that can be used for subsequent interactions.
+
+The Code Provider MUST support a Session Status endpoint to identify the status of a session using a Session ID.
+
+The Code Provider MUST support the ability to perform a callback to the Code Consumer when the status of the Session changes.
+
+The Code Consumer MAY provide a callback as metadata when a session is claimed.
+
+The detailed requirements for these endpoints are defined in the [Core QR Profile definition](./profiles/core-profile.md).
+
+## Code Provider Capability Discovery
+
+The Code Provider MUST make a static JSON [RFC8529] file available at:
+
+`https://<provider base>/.discovery.json`
+
+where `<provider base>` is the same path that appears in the QR Code.
+
+Note that `<provider base>` MUST be communicated to the Code Consumer as the client identifier when calling any endpoint hosted by the Code Consumer in the “Client-ID” http header.
+
+This discovery file will contain details to be used for security, communicating supported capability and providing locations of profile specific endpoints.
+
+This discovery file MUST contain a single root object containing a “services” property.  The “services” property will contain series of properties each named according to the following URN format:
+
+`urn:cds-au:qr:<profile>:<version>`
+
+Note that using cds-au has the advantage that it gives a globally unique prefix that aligns with the model already in use nationally (ie. the CDR regime).  The taxonomy for this namespace is managed by the [Data Standards Body](https://consumerdatastandards.gov.au/).
+
+This discovery file MAY contain an “authority” property in the root object.  The “authority“ property will be an array of strings with each element containing the URL of an authority file that the Code Provider is registered with using the optional central authority mechanism.
+
+Common configuration applicable to all profiles are described in the ‘core-provider’ profile defined in the [Core QR Profile definition](./profiles/core-profile.md).
+
+```
+Non-normative example of a code provider discovery file:
+{
+   “authority”: [
+      “https://www.authorityprovider.com”
+   ],
+   “services”: {
+      “urn:cds-au:qr:core-provider:1”: {
+         ...
+      },
+      “urn:cds-au:qr:pos-merchant:1”: {
+         ...
+      }
+   }
+}
+```
+
+## Code Consumer Capability Discovery
+
+The Code Consumer MUST make a static JSON [RFC8529] file available at:
+
+`https://<consumer base>/.discovery.json`
+
+where `<consumer base>` is a path that MUST be communicated to the Code Provider as the client identifier when calling any endpoint hosted by the Code Provider in the “Client-ID” http header.
+
+This discovery file will contain details to be used for security, communicating supported capability and providing locations of profile specific endpoints.
+
+This discovery file MUST be formatted in the same way as the Code Provider discovery file.
+
+Common configuration applicable to all profiles are described in the ‘core-consumer’ profile in the [Core QR Profile definition](./profiles/core-profile.md).
+
+An entity that is operating as both a Code Provider and a Code Consumer MAY use the same discovery file for both roles by including both the ‘core-provider’ profile and the ‘core-consumer’ profile.
+
+## Central Authority
+
+To allow for increased trust a central authority may optionally be used by the participating Code Providers and Code Consumers.  A variety of trusted organisations may offer a central authority service to ecosystem participants.
+
+A central authority would implement registration processes and policies to ensure trust at their own discretion.
+
+To act as a central authority and advertise the entities that they have registered they MUST make a static JSON [RFC8529] file available at:
+
+`https://<authority base>/.authority.json`
+
+This authority file MUST contain a single root object containing a “providers” property and a “consumers” property.
+
+The “providers” property and “consumers” property will both have the same structure.  Both contain a series of properties each named with the base URL (including protocol) for the registered entities.  The contents of these entity specific properties is not specified and may be extended by the central authority to provide additional information regarding their registration process.
+
+```
+Non-normative example of a central authority file:
+{
+   “providers”: {
+      “https://www.codeprovider1.com”: {
+         ...
+      },
+      “https://www.codeprovider2.com”: {
+         ...
+      }
+   “consumers”: {
+      “https://www.codeconsumer1.com”: {
+         ...
+      },
+      “https://www. codeconsumer1.com”: {
+         ...
+      }
+   }
+}
+```
+
+## Additional References
+
+This standard is augmented by definitions of profiles.  These profiles define a specific set of capabilities that may be supported by a QR Code published in alignment with this standard.
+
+There is a core profile that is MUST be supported by both Code Providers and Code Consumers.  This core profile defines the end points that are critical for the operation of the standard and allow for extension by capability profiles.
+
+Currently defined profiles:
+
+**[Core QR Profile definition](./profiles/core-profile.md)**
+
+Core profile that defines the base end points and discovery fields that allow for Code Providers and Code Consumers to communicate and discover the capabilities and characteristics supported by both parties.
+
+**[Payment Profile](./profiles/payment-profile.md)**
+
+A profile that allows for a merchant to offer a payment that needs to be made that can then be claimed by a wallet to provide the payment method for the payment.  This profile is designed to support both online checkout and merchant point of sale scenarios.
+
+## Normative References
+
+| Label | Reference |
+|-------|-----------|
+|[RFC2119]|Bradner, S, "Key words for use in RFCs to Indicate Requirement Levels", [RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119), March 1997.|
+|[ISO18004]|ISO/IEC JTC 1/SC 31, "ISO/IEC 18004:2015 Information technology - Automatic identification and data capture techniques - QR Code bar code symbology specification", [ISO/IEC 18004:2015](https://www.iso.org/standard/62021.html), February 2015.|
+|[RFC8529]|Bray, T., Ed., "The JavaScript Object Notation (JSON) Data Interchange Format", [RFC 8259](https://datatracker.ietf.org/doc/html/rfc8259), December 2017.|
+|[RFC7519]|Jones, M., Bradley, J., and N. Sakimura, “JSON Web Token (JWT)” [RFC 7519](https://datatracker.ietf.org/doc/html/rfc7519), May 2015.|
+|[RFC7515]|Jones, M., Bradley, J., and N. Sakimura, “JSON Web Signature (JWS),” [RFC 7515](https://datatracker.ietf.org/doc/html/rfc7515), May 2015.|
+|[RFC7516]|Jones, M., Hildebrand, J., “JSON Web Encryption (JWE),” [RFC 7516](https://datatracker.ietf.org/doc/html/rfc7516), May 2015.|
+|[RFC7517]|Jones, M., “JSON Web Key (JWK),” [RFC 7517](https://datatracker.ietf.org/doc/html/rfc7517), May 2015.|
+|[RFC7518]|Jones, M., “JSON Web Algorithms (JWA),” [RFC 7518](https://datatracker.ietf.org/doc/html/rfc7518), May 2015.|
+
+## Informative References
+
+| Label | Reference |
+|-------|-----------|
+|[json-schema]|Wright, A., Andrews, H., Hutton, B., and G. Dennis, "JSON Schema: A Media Type for Describing JSON Documents", draft-bhutton-json-schema-00 (work in progress), December 2020.|
