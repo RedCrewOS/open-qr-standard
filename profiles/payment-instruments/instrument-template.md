@@ -23,7 +23,7 @@ The following schema defines the fields that convey the information about the pa
 
 Payment instrument schema [JSONSchema]:
 
-```
+```json
 {
   "$schema": "http://json-schema.org/draft-07/schema",
   "$id": "https://cds-au/qr/pos-instrument/<name>/<version>",

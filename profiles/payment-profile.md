@@ -45,7 +45,7 @@ The following schema defines the content to be returned by the Code Provider in 
 
 Profile specific response schema [JSONSchema]:
 
-```
+```json
 {
   "$schema": "http://json-schema.org/draft-07/schema",
   "$id": "https://cds-au/qr/pos-merchant/1/response/session/info",
@@ -101,7 +101,7 @@ The following schema will be included in the request object with an object with 
 
 Profile specific request schema [JSONSchema]:
 
-```
+```json
 {
    "$schema": "http://json-schema.org/draft-07/schema",
    "$id": "https://cds-au/qr/pos-wallet/1/request/session/claim",
@@ -137,7 +137,7 @@ The following schema will be included in the response object with an object with
 
 Profile specific response schema [JSONSchema]:
 
-```
+```json
 {
    "$schema": "http://json-schema.org/draft-07/schema",
    "$id": "https://cds-au/qr/pos-merchant/1/response/session/claim",
@@ -231,7 +231,7 @@ The following schema defines the content to be returned by the Code Provider in 
 
 Profile specific response schema [JSONSchema]:
 
-```
+```json
 {
    "$schema": "http://json-schema.org/draft-07/schema",
    "$id": "https://cds-au/qr/pos-merchant/1/response/session/status",

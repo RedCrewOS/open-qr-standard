@@ -63,7 +63,7 @@ Content-Type: application/json
 
 Successful response schema [JSONSchema]:
 
-```
+```json
 {
    "$schema": "http://json-schema.org/draft-07/schema",
    "$id": "https://cds-au/qr/core-provider/1/response/session/info",
@@ -149,7 +149,7 @@ POST
 
 Request schema [JSONSchema]:
 
-```
+```json
 {
    "$schema": "http://json-schema.org/draft-07/schema",
    "$id": "https://cds-au/qr/core-provider/1/request/session/claim",
@@ -218,7 +218,7 @@ Content-Type: application/json
 
 Successful response schema [JSONSchema]:
 
-```
+```json
 {
    "$schema": "http://json-schema.org/draft-07/schema",
    "$id": "https://cds-au/qr/core-provider/1/response/session/claim",
@@ -296,7 +296,7 @@ Content-Type: application/json
 
 Successful response schema [JSONSchema]:
 
-```
+```json
 {
    "$schema": "http://json-schema.org/draft-07/schema",
    "$id": "https://cds-au/qr/core-provider/1/response/session/status",
