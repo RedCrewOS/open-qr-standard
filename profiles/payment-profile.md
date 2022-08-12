@@ -47,49 +47,49 @@ Profile specific response schema [JSONSchema]:
 
 ```json
 {
-  "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://cds-au/qr/pos-merchant/1/response/session/info",
-  "type": "object",
-  "additionalProperties": true,
-  "required": [
-    "merchantId",
-    "instrumentTypes"
-  ],
-  "properties": {
-    "multiUse": {
-      "type": "boolean",
-      "description": "Flag indicating that the QR is able to be reused so multiple claims will succeed but provide different session IDs.  Assumed to be false if not present"
-    },
-    "merchantId": {
-      "type": "string",
-      "description": "Identifier of the merchant for the payment"
-    },
-    "merchantName": {
-      "type": "string",
-      "description": "Display name of the merchant for the payment"
-    },
-    "grossAmount": {
-      "type": "string",
-      "description": "Optional gross amount for the payment.  If this value is not present then the final amount for the payment is not yet known"
-    },
-    "currency": {
-      "type": "string",
-      "description": "A code representing the currency of the gross amount [ISO4217]. If not set AUD is assumed."
-    },
-    "merchantReference": {
-      "type": "string",
-      "description": "Optional reference identifier which represents the QR session in a merchant's internal systems."
-    },
-    "synchronous": {
-      "type": "boolean",
-      "description": "Flag indicating that a payment with this QR code will be synchronous and a final status will be provided when the session is claimed.  Assumed to be false if absent"
-    },
-    "instrumentTypes": {
-      "type": "object",
-      "description": "Map of instrument types supported for the payment",
-      "additionalProperties": true
-    }
-  }
+   "$schema": "http://json-schema.org/draft-07/schema",
+   "$id": "https://cds-au/qr/pos-merchant/1/response/session/info",
+   "type": "object",
+   "additionalProperties": true,
+   "required": [
+      "merchantId",
+      "instrumentTypes"
+   ],
+   "properties": {
+      "multiUse": {
+         "type": "boolean",
+         "description": "Flag indicating that the QR is able to be reused so multiple claims will succeed but provide different session IDs.  Assumed to be false if not present"
+      },
+      "merchantId": {
+         "type": "string",
+         "description": "Identifier of the merchant for the payment"
+      },
+      "merchantName": {
+         "type": "string",
+         "description": "Display name of the merchant for the payment"
+      },
+      "grossAmount": {
+         "type": "string",
+         "description": "Optional gross amount for the payment.  If this value is not present then the final amount for the payment is not yet known"
+      },
+      "currency": {
+         "type": "string",
+         "description": "A code representing the currency of the gross amount [ISO4217]. If not set AUD is assumed."
+      },
+      "merchantReference": {
+         "type": "string",
+         "description": "Optional reference identifier which represents the QR session in a merchant's internal systems."
+      },
+      "synchronous": {
+         "type": "boolean",
+         "description": "Flag indicating that a payment with this QR code will be synchronous and a final status will be provided when the session is claimed.  Assumed to be false if absent"
+      },
+      "instrumentTypes": {
+         "type": "object",
+         "description": "Map of instrument types supported for the payment",
+         "additionalProperties": true
+      }
+   }
 }
 ```
 
@@ -109,24 +109,25 @@ Profile specific request schema [JSONSchema]:
    "properties": {
       "additionalProperties": false,
       "required": [
-         “customerId”,
+         "customerId",
          "instrument"
       ],
-      “customerId”: {
+      "customerId": {
          "type": "string",
          "description": "Identifier of the customer for the payment"
       },
-      “instrument”: {
+      "instrument": {
          "type": "object",
          "description": "Object containing the details of the payment instrument.  The contents of the object are dependent on the value of the type property.  Fields required to be present will vary based on the instrument type",
          "additionalProperties": true,
          "required": [
-            “type”
+            "type"
          ],
-         “properties”: {
-         “type”: {
-            “type”: “string”,
-            “description”: “The type of the instrument to be used for the payment.  Additional fields such as tokens or identifiers will be included as defined for the specific instrument type.  The instrument type must be one of the types indicated as being supported in the provider discovery document and in the response to a call to session info”
+         "properties": {
+            "type": {
+               "type": "string",
+               "description": "The type of the instrument to be used for the payment.  Additional fields such as tokens or identifiers will be included as defined for the specific instrument type.  The instrument type must be one of the types indicated as being supported in the provider discovery document and in the response to a call to session info"
+            }
          }
       }
    }
@@ -145,22 +146,22 @@ Profile specific response schema [JSONSchema]:
    "properties": {
       "additionalProperties": true,
       "required": [
-         “merchantId”,
+         "merchantId",
          "status"
       ],
-      “merchantId”: {
+      "merchantId": {
          "type": "string",
          "description": "Identifier of the merchant for the payment"
       },
-      “merchantName”: {
+      "merchantName": {
          "type": "string",
          "description": "Display name of the merchant for the payment"
       },
-      “grossAmount”: {
+      "grossAmount": {
          "type": "string",
          "description": "Optional gross amount for the payment.  If this value is not present then the final amount for the payment is not yet known"
       },
-      “currency”: {
+      "currency": {
          "type": "string",
          "description": "A code representing the currency [ISO4217] of the amounts in the response. If not set AUD is assumed."
       },
@@ -170,7 +171,7 @@ Profile specific response schema [JSONSchema]:
          "items": {
             "required": [
                "label",
-               “totalPrice”
+               "totalPrice"
             ],
             "type": "object",
             "properties": {
@@ -179,37 +180,37 @@ Profile specific response schema [JSONSchema]:
                   "type": "string"
                },
                "description": {
-                   "description": "Longer description of the basket item",
-                   "type": "string"
-                },
-                "quantity": {
-                   "description": "The number of units of the item in the basket if multiple is possible.  Is a number to accommodate items charged by weight or length",
-                   "type": "number"
-                },
-                "unitPrice": {
-                   "description": "The unit price of the item excluding tax.  May be positive or negative.  A negative values indicates a discount or rebate",
-                   "type": "number"
-                },
-                "unitTax": {
-                   "description": "The unit tax of the item.  May be positive or negative.  A negative values indicates a discount or rebate",
-                   "type": "number"
-                },
-                "unitMeasure":{
-                   "description": "Optional display string for the measure of the unit",
-                   "type": "string"
-                },
-                "totalPrice": {
-                   "description": "The total price of the item excluding tax.  May be positive or negative.  A negative values indicates a discount or rebate",
-                   "type": "number"
-                },
-                "totalTax": {
-                   "description": "The total tax of the item.  May be positive or negative.  A negative values indicates a discount or rebate",
-                   "type": "number"
-                }
+                  "description": "Longer description of the basket item",
+                  "type": "string"
+               },
+               "quantity": {
+                  "description": "The number of units of the item in the basket if multiple is possible.  Is a number to accommodate items charged by weight or length",
+                  "type": "number"
+               },
+               "unitPrice": {
+                  "description": "The unit price of the item excluding tax.  May be positive or negative.  A negative values indicates a discount or rebate",
+                  "type": "number"
+               },
+               "unitTax": {
+                  "description": "The unit tax of the item.  May be positive or negative.  A negative values indicates a discount or rebate",
+                  "type": "number"
+               },
+               "unitMeasure":{
+                  "description": "Optional display string for the measure of the unit",
+                  "type": "string"
+               },
+               "totalPrice": {
+                  "description": "The total price of the item excluding tax.  May be positive or negative.  A negative values indicates a discount or rebate",
+                  "type": "number"
+               },
+               "totalTax": {
+                  "description": "The total tax of the item.  May be positive or negative.  A negative values indicates a discount or rebate",
+                  "type": "number"
+               }
             }
          }
       },
-      “status”: {
+      "status": {
          "description": "The type of transaction: PAYMENT or REFUND",
          "type": "string",
          "enum": [
@@ -239,22 +240,22 @@ Profile specific response schema [JSONSchema]:
    "properties": {
       "additionalProperties": true,
       "required": [
-         “merchantId”,
+         "merchantId",
          "status"
       ],
-      “merchantId”: {
+      "merchantId": {
          "type": "string",
          "description": "Identifier of the merchant for the payment"
       },
-      “merchantName”: {
+      "merchantName": {
          "type": "string",
          "description": "Display name of the merchant for the payment"
       },
-      “grossAmount”: {
+      "grossAmount": {
          "type": "string",
          "description": "Optional gross amount for the payment.  If this value is not present then the final amount for the payment is not yet known"
       },
-      “currency”: {
+      "currency": {
          "type": "string",
          "description": "A code representing the currency [ISO4217] of the amounts in the response. If not set AUD is assumed."
       },
@@ -264,7 +265,7 @@ Profile specific response schema [JSONSchema]:
          "items": {
             "required": [
                "label",
-               “totalPrice”
+               "totalPrice"
             ],
             "type": "object",
             "properties": {
@@ -303,7 +304,7 @@ Profile specific response schema [JSONSchema]:
             }
          }
       },
-      “status”: {
+      "status": {
          "enum": [
             "CLAIMED",
             "PROCESSING",
