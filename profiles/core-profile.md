@@ -63,7 +63,7 @@ Content-Type: application/json
 
 Successful response schema [JSONSchema]:
 
-```
+```json
 {
    "$schema": "http://json-schema.org/draft-07/schema",
    "$id": "https://cds-au/qr/core-provider/1/response/session/info",
@@ -149,7 +149,7 @@ POST
 
 Request schema [JSONSchema]:
 
-```
+```json
 {
    "$schema": "http://json-schema.org/draft-07/schema",
    "$id": "https://cds-au/qr/core-provider/1/request/session/claim",
@@ -218,7 +218,7 @@ Content-Type: application/json
 
 Successful response schema [JSONSchema]:
 
-```
+```json
 {
    "$schema": "http://json-schema.org/draft-07/schema",
    "$id": "https://cds-au/qr/core-provider/1/response/session/claim",
@@ -234,7 +234,7 @@ Successful response schema [JSONSchema]:
          "additionalProperties": true,
          "required": [
             "sessionId",
-            “provider”,
+            "provider",
             "profiles"
          ],
          "properties": {
@@ -262,7 +262,7 @@ Successful response schema [JSONSchema]:
       "meta": {
          "type": "object",
          "description": "Used to hold any additional meta data that the provider wishes to provide",
-     	"additionalProperties": true
+         "additionalProperties": true
       }
    }
 }
@@ -296,7 +296,7 @@ Content-Type: application/json
 
 Successful response schema [JSONSchema]:
 
-```
+```json
 {
    "$schema": "http://json-schema.org/draft-07/schema",
    "$id": "https://cds-au/qr/core-provider/1/response/session/status",
@@ -312,7 +312,7 @@ Successful response schema [JSONSchema]:
          "additionalProperties": true,
          "required": [
             "sessionId",
-            “provider”,
+            "provider",
             "profiles"
          ],
          "properties": {
@@ -340,7 +340,7 @@ Successful response schema [JSONSchema]:
       "meta": {
          "type": "object",
          "description": "Used to hold any additional meta data that the provider wishes to provide",
-     	"additionalProperties": true
+         "additionalProperties": true
       }
    }
 }
@@ -351,7 +351,6 @@ Successful response schema [JSONSchema]:
 A static JSON resource used to obtain the keys required for authentication and encryption.  Defined according to [RFC7517].
 
 The JWKS endpoint for the Code Provider MUST include sufficient keys to accommodate the algorithms supported by the provider.
-
 
 ## Code Consumer Discovery Document
 
@@ -371,6 +370,7 @@ The supported discovery properties are:
 ## Code Consumer Endpoints
 
 ### JWKS Endpoint
+
 A static JSON resource used to obtain the keys required for authentication and encryption.  Defined according to [RFC7517].
 
 The JWKS endpoint for the Code Provider MUST include sufficient keys to accommodate the algorithms supported by the consumer.
