@@ -33,11 +33,11 @@ Within this section information about this payment instrument will be included u
 
 The supported properties are:
 
-| Property       | Required? | Description                                                                                                             |
-| -------------- | --------- | ----------------------------------------------------------------------------------------------------------------------- |
-| informationUrl | Y         | URL of the documentation which provides information on how to approve and finalize payments using this instrument type. |
-| cardSupported  | Y         | Boolean flag indicating if the Code Provider supports payment via card details.                                         |
-| tokenSupported | Y         | Boolean flag indicating if the Code Provider supports payment via an Eftpos card formtoken.                             |
+| Property       | Optionality | Description                                                                                                             |
+| -------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------- |
+| informationUrl | REQUIRED    | URL of the documentation which provides information on how to approve and finalize payments using this instrument type. |
+| cardSupported  | REQUIRED    | Boolean flag indicating if the Code Provider supports payment via card details.                                         |
+| tokenSupported | REQUIRED    | Boolean flag indicating if the Code Provider supports payment via an Eftpos card formtoken.                             |
 
 #### Session Info Endpoint
 
