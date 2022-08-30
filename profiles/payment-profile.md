@@ -192,7 +192,7 @@ Profile specific response schema [JSONSchema]:
                   "type": "number"
                },
                "unitTax": {
-                  "description": "The unit tax of the item.  May be positive or negative.  A negative values indicates a discount or rebate",
+                  "description": "The unit tax of the item. May be positive or negative.  A negative values indicates a discount or rebate",
                   "type": "number"
                },
                "unitMeasure":{
@@ -200,18 +200,18 @@ Profile specific response schema [JSONSchema]:
                   "type": "string"
                },
                "totalPrice": {
-                  "description": "The total price of the item excluding tax.  May be positive or negative.  A negative values indicates a discount or rebate",
+                  "description": "The total price of the item excluding tax. May be positive or negative.  A negative values indicates a discount or rebate",
                   "type": "number"
                },
                "totalTax": {
-                  "description": "The total tax of the item.  May be positive or negative.  A negative values indicates a discount or rebate",
+                  "description": "The total tax of the item. May be positive or negative.  A negative values indicates a discount or rebate",
                   "type": "number"
                }
             }
          }
       },
       "status": {
-         "description": "The type of transaction: PAYMENT or REFUND",
+         "description": "The current status of the session",
          "type": "string",
          "enum": [
             "CLAIMED",
@@ -305,6 +305,8 @@ Profile specific response schema [JSONSchema]:
          }
       },
       "status": {
+         "description": "The current status of the session",
+         "type": "string",
          "enum": [
             "CLAIMED",
             "PROCESSING",
