@@ -58,7 +58,7 @@ Profile specific response schema [JSONSchema]:
    "properties": {
       "multiUse": {
          "type": "boolean",
-         "description": "Flag indicating that the QR is able to be reused so multiple claims will succeed but provide different session IDs.  Assumed to be false if not present"
+         "description": "Flag indicating that the QR is able to be reused so multiple claims will succeed but provide different session IDs. Assumed to be false if not present"
       },
       "merchantId": {
          "type": "string",
@@ -70,7 +70,7 @@ Profile specific response schema [JSONSchema]:
       },
       "grossAmount": {
          "type": "string",
-         "description": "Optional gross amount for the payment.  If this value is not present then the final amount for the payment is not yet known"
+         "description": "Optional gross amount for the payment. If this value is not present then the final amount for the payment is not yet known"
       },
       "currency": {
          "type": "string",
@@ -82,7 +82,7 @@ Profile specific response schema [JSONSchema]:
       },
       "synchronous": {
          "type": "boolean",
-         "description": "Flag indicating that a payment with this QR code will be synchronous and a final status will be provided when the session is claimed.  Assumed to be false if absent"
+         "description": "Flag indicating that a payment with this QR code will be synchronous and a final status will be provided when the session is claimed. Assumed to be false if absent"
       },
       "instrumentTypes": {
          "type": "object",
@@ -118,7 +118,7 @@ Profile specific request schema [JSONSchema]:
       },
       "instrument": {
          "type": "object",
-         "description": "Object containing the details of the payment instrument.  The contents of the object are dependent on the value of the type property.  Fields required to be present will vary based on the instrument type",
+         "description": "Object containing the details of the payment instrument. The contents of the object are dependent on the value of the type property. Fields required to be present will vary based on the instrument type",
          "additionalProperties": true,
          "required": [
             "type"
@@ -126,7 +126,7 @@ Profile specific request schema [JSONSchema]:
          "properties": {
             "type": {
                "type": "string",
-               "description": "The type of the instrument to be used for the payment.  Additional fields such as tokens or identifiers will be included as defined for the specific instrument type.  The instrument type must be one of the types indicated as being supported in the provider discovery document and in the response to a call to session info"
+               "description": "The type of the instrument to be used for the payment. Additional fields such as tokens or identifiers will be included as defined for the specific instrument type. The instrument type must be one of the types indicated as being supported in the provider discovery document and in the response to a call to session info"
             }
          }
       }
@@ -159,7 +159,7 @@ Profile specific response schema [JSONSchema]:
       },
       "grossAmount": {
          "type": "string",
-         "description": "Optional gross amount for the payment.  If this value is not present then the final amount for the payment is not yet known"
+         "description": "Optional gross amount for the payment. If this value is not present then the final amount for the payment is not yet known"
       },
       "currency": {
          "type": "string",
@@ -184,15 +184,15 @@ Profile specific response schema [JSONSchema]:
                   "type": "string"
                },
                "quantity": {
-                  "description": "The number of units of the item in the basket if multiple is possible.  Is a number to accommodate items charged by weight or length",
+                  "description": "The number of units of the item in the basket if multiple is possible. Is a number to accommodate items charged by weight or length",
                   "type": "number"
                },
                "unitPrice": {
-                  "description": "The unit price of the item excluding tax.  May be positive or negative.  A negative values indicates a discount or rebate",
+                  "description": "The unit price of the item excluding tax. May be positive or negative. A negative values indicates a discount or rebate",
                   "type": "number"
                },
                "unitTax": {
-                  "description": "The unit tax of the item. May be positive or negative.  A negative values indicates a discount or rebate",
+                  "description": "The unit tax of the item. May be positive or negative. A negative values indicates a discount or rebate",
                   "type": "number"
                },
                "unitMeasure":{
@@ -200,11 +200,11 @@ Profile specific response schema [JSONSchema]:
                   "type": "string"
                },
                "totalPrice": {
-                  "description": "The total price of the item excluding tax. May be positive or negative.  A negative values indicates a discount or rebate",
+                  "description": "The total price of the item excluding tax. May be positive or negative. A negative values indicates a discount or rebate",
                   "type": "number"
                },
                "totalTax": {
-                  "description": "The total tax of the item. May be positive or negative.  A negative values indicates a discount or rebate",
+                  "description": "The total tax of the item. May be positive or negative. A negative values indicates a discount or rebate",
                   "type": "number"
                }
             }
@@ -253,7 +253,7 @@ Profile specific response schema [JSONSchema]:
       },
       "grossAmount": {
          "type": "string",
-         "description": "Optional gross amount for the payment.  If this value is not present then the final amount for the payment is not yet known"
+         "description": "Optional gross amount for the payment. If this value is not present then the final amount for the payment is not yet known"
       },
       "currency": {
          "type": "string",
@@ -278,15 +278,15 @@ Profile specific response schema [JSONSchema]:
                    "type": "string"
                 },
                 "quantity": {
-                   "description": "The number of units of the item in the basket if multiple is possible.  Is a number to accommodate items charged by weight or length",
+                   "description": "The number of units of the item in the basket if multiple is possible. Is a number to accommodate items charged by weight or length",
                    "type": "number"
                 },
                 "unitPrice": {
-                   "description": "The unit price of the item excluding tax.  May be positive or negative.  A negative values indicates a discount or rebate",
+                   "description": "The unit price of the item excluding tax. May be positive or negative. A negative values indicates a discount or rebate",
                    "type": "number"
                 },
                 "unitTax": {
-                   "description": "The unit tax of the item.  May be positive or negative.  A negative values indicates a discount or rebate",
+                   "description": "The unit tax of the item. May be positive or negative. A negative values indicates a discount or rebate",
                    "type": "number"
                 },
                 "unitMeasure":{
@@ -294,11 +294,11 @@ Profile specific response schema [JSONSchema]:
                    "type": "string"
                 },
                 "totalPrice": {
-                   "description": "The total price of the item excluding tax.  May be positive or negative.  A negative values indicates a discount or rebate",
+                   "description": "The total price of the item excluding tax. May be positive or negative. A negative values indicates a discount or rebate",
                    "type": "number"
                 },
                 "totalTax": {
-                   "description": "The total tax of the item.  May be positive or negative.  A negative values indicates a discount or rebate",
+                   "description": "The total tax of the item. May be positive or negative. A negative values indicates a discount or rebate",
                    "type": "number"
                 }
             }
