@@ -10,10 +10,10 @@ end
 note over Code Provider, Code Consumer:Consumer scans QR Code with device
 
 Code Consumer->Display:QR Code Scanned
-Display->Code Consumer:URL containing base path and ID extracted from code
+Display-->Code Consumer:URL containing base path and ID extracted from code
 
 Code Consumer->Code Provider:Provider capabilities requested from discovery endpoint
-Code Provider->Code Consumer:Capabilities provided
+Code Provider-->Code Consumer:Capabilities provided
 Code Consumer->Code Consumer:Ensure capabilities match\nand extract security configuration
 
 Code Consumer->Code Provider:Request details of session
@@ -21,7 +21,7 @@ Code Consumer->Code Provider:Request details of session
 Code Provider->Code Consumer:Consumer capabilities requested from discovery endpoint
 
 
-Code Consumer->Code Provider:Capabilities provided
+Code Consumer-->Code Provider:Capabilities provided
 
 Code Provider->Code Provider:Validate credentials based on\nconsumer capability information
 
@@ -29,7 +29,7 @@ opt Use of Central Authority
 Code Provider->Central Authority:Validate the Consumer certification
 end
 
-Code Provider->Code Consumer:Provide details of session
+Code Provider-->Code Consumer:Provide details of session
 
 Code Consumer->Code Consumer:Validate that the session type is supported
 
