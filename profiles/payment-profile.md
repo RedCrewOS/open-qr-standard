@@ -344,7 +344,6 @@ The supported discovery properties are:
 
 | Property | Optionality | Description |
 |----------|-------------|-------------|
-
 |loyaltyPrograms|OPTIONAL|Array of strings indicating the loyalty programs supported for payments.  The values in the array are string indicators nominated by the loyalty program organisation.|
 |instrumentTypes|OPTIONAL|Map indicating the types of payment instruments supported by the code provider.  The keys in the map are string indicators nominated by the organisation that manages the instrument type. Keys follow a URN format and support versions. Metadata about the instrument type may be included in the mapped value object.|
 |callbackUri|OPTIONAL|A URL where the wallet can receive status callbacks. If supplied the merchant should send a POST request to this URL using the ‘Session Status’ schema whenever information about a session is changed.|
