@@ -3,8 +3,9 @@ object Provider Consumer Display Authority
 Provider->Provider:Journey Initiated
 Provider->Display:QR Code Issued
 
-Provider->Display:New QR Code Issued
+Provider->Display: (optional: Transitory QR Codes) New QR Code Issued
 
+note right of Consumer: Consumer scans QR Code with device
 Consumer->Display:QR Code Scanned
 Display->Consumer:Base path and ID extracted from QR code
 
@@ -21,7 +22,7 @@ Consumer->Provider:Capabilities provided
 
 Provider->Provider:Validate credentials based
 
-Provider->Authority:Validate the Consumer certification
+Provider->Authority: (optional: Use of Central Authority) Validate the Consumer certification
 
 Provider->Consumer:Provide details of session
 
