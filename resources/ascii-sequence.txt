@@ -14,7 +14,7 @@ Provider->Consumer:Capabilities provided
 Consumer->Consumer:Ensure capabilities match
 Consumer->Consumer:Extract security configuration
 
-Consumer->Provider:Request details of session
+Consumer->Provider:Request details of Offer
 
 Provider->Consumer:Consumer capabilities from discovery
 
@@ -24,10 +24,10 @@ Provider->Provider:Validate credentials based
 
 Provider->Authority: (optional: Use of Central Authority) Validate the Consumer certification
 
-Provider->Consumer:Provide details of session
+Provider->Consumer:Provide details of Offer
 
-Consumer->Consumer:Validate session type is supported
+Consumer->Consumer:Validate Offer type is supported
 
-Consumer->Provider:"Claim" session and provide details
+Consumer->Provider:"Claim" Session and provide details
 
 Provider->Consumer:Callback to indicate journey completion

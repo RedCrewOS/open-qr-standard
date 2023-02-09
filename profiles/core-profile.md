@@ -7,7 +7,7 @@ Note that this profile should read as an addendum to the [Open QR Standard](../o
 
 This profile MUST be supported by both Code Providers and Code Consumers.
 
-**DRAFT**: v1.0.0
+**DRAFT**: v1.1.0
 
 **Authors**:	James Bligh, Kareem Al-Bassam, Jack Moggach
 
@@ -23,8 +23,8 @@ The supported discovery properties are:
 
 | Property | Optionality | Description |
 |----------|-------------|-------------|
-|sessionInfoUri|REQUIRED|URL of the Session Info endpoint hosted by the Code Provider.|
-|sessionClaimUri|REQUIRED|URL of the Session Claim endpoint hosted by the Code Provider.|
+|offerInfoUri|REQUIRED|URL of the Offer Info endpoint hosted by the Code Provider.|
+|offerClaimUri|REQUIRED|URL of the Offer Claim endpoint hosted by the Code Provider.|
 |sessionStatusUri|REQUIRED|URL of the Session Status endpoint hosted by the Code Provider.|
 |jwksUri|REQUIRED|URL of the JWKS endpoint for the Code Provider.  MUST include appropriate keys to support the algorithms supported.|
 |signingAlgorithms|REQUIRED|JSON array containing a list of supported JWS [RFC7515] signing algorithms.  Values to be taken from the JWA standard [RFC7518].  Only asymmetric algorithms may be supported.|
@@ -35,9 +35,9 @@ The supported discovery properties are:
 
 ## Code Provider Endpoints
 
-### Session Info Endpoint
+### Offer Info Endpoint
 
-An API used to obtain information about the session associated with a nominated QR ID.
+An API used to obtain information about the Offer associated with a nominated QR ID.
 
 #### HTTP Method
 
@@ -66,7 +66,7 @@ Successful response schema [JSONSchema]:
 ```json
 {
    "$schema": "http://json-schema.org/draft-07/schema",
-   "$id": "https://cds-au/qr/core-provider/1/response/session/info",
+   "$id": "https://cds-au/qr/core-provider/1/response/offer/info",
    "type": "object",
    "additionalProperties": false,
    "required": [
@@ -131,9 +131,9 @@ Successful response schema [JSONSchema]:
 }
 ```
 
-### Session Claim Endpoint
+### Offer Claim Endpoint
 
-An API used to claim a session under a specific QR Profile using a nominated QR ID.
+An API used to claim an offer and establish a session under a specific QR Profile using a nominated QR ID.
 
 #### HTTP Method
 
@@ -143,7 +143,7 @@ POST
 
 | Parameter | Optionality | Description |
 |-----------|-------------|-------------|
-|qr-id|REQUIRED|The QR ID that a session is to be claimed for.|
+|qr-id|REQUIRED|The QR ID that an offer is to be claimed for.|
 
 #### Request
 
@@ -152,7 +152,7 @@ Request schema [JSONSchema]:
 ```json
 {
    "$schema": "http://json-schema.org/draft-07/schema",
-   "$id": "https://cds-au/qr/core-provider/1/request/session/claim",
+   "$id": "https://cds-au/qr/core-provider/1/request/offer/claim",
    "type": "object",
    "additionalProperties": false,
    "required": [
@@ -221,7 +221,7 @@ Successful response schema [JSONSchema]:
 ```json
 {
    "$schema": "http://json-schema.org/draft-07/schema",
-   "$id": "https://cds-au/qr/core-provider/1/response/session/claim",
+   "$id": "https://cds-au/qr/core-provider/1/response/offer/claim",
    "type": "object",
    "additionalProperties": false,
    "required": [
@@ -240,7 +240,7 @@ Successful response schema [JSONSchema]:
          "properties": {
             "sessionId": {
                "type": "string",
-               "description": "The session-id created by claiming the session.  This ID represents this claim event and must be unique.  Can be used for subsequent calls for status"
+               "description": "The session-id representing the session created by claiming the offer.  This ID represents this claim event and must be unique.  Can be used for subsequent calls for status"
             },
             "provider": {
                "type": "string",
@@ -270,7 +270,7 @@ Successful response schema [JSONSchema]:
 
 ### Session Status Endpoint
 
-An API used to obtain information about a specific session that was previously claimed.
+An API used to obtain information about a specific session that was previously established by claiming an Offer.
 
 #### HTTP Method
 
@@ -280,7 +280,7 @@ GET
 
 | Parameter | Optionality | Description |
 |-----------|-------------|-------------|
-|session-id|REQUIRED|The Session ID that information is requested for that was previously obtained from a call to the Session Claim endpoint.|
+|session-id|REQUIRED|The Session ID that information is requested for that was previously obtained from a call to the Offer Claim endpoint.|
 
 #### Error Responses
 

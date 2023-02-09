@@ -9,7 +9,7 @@ This profile relies upon, and extends the [Core QR Profile definition](./core-pr
 
 This profile is optional.
 
-**DRAFT**: v1.0.0
+**DRAFT**: v1.1.0
 
 **Authors**:	James Bligh, Kareem Al-Bassam, Jack Moggach
 
@@ -39,16 +39,16 @@ The supported discovery properties are:
 
 ## Code Provider Endpoints
 
-### Session Info Endpoint
+### Offer Info Endpoint
 
-The following schema defines the content to be returned by the Code Provider in a request to the session info endpoint under the ‘profiles’ property.  This schema will be returned with an object with the field name of the *Code Provider Profile URN*.
+The following schema defines the content to be returned by the Code Provider in a request to the offer info endpoint under the ‘profiles’ property.  This schema will be returned with an object with the field name of the *Code Provider Profile URN*.
 
 Profile specific response schema [JSONSchema]:
 
 ```json
 {
    "$schema": "http://json-schema.org/draft-07/schema",
-   "$id": "https://cds-au/qr/pos-merchant/1/response/session/info",
+   "$id": "https://cds-au/qr/pos-merchant/1/response/offer/info",
    "type": "object",
    "additionalProperties": true,
    "required": [
@@ -78,11 +78,11 @@ Profile specific response schema [JSONSchema]:
       },
       "merchantReference": {
          "type": "string",
-         "description": "Optional reference identifier which represents the QR session in a merchant's internal systems."
+         "description": "Optional reference identifier which represents the offer in a merchant's internal systems."
       },
       "synchronous": {
          "type": "boolean",
-         "description": "Flag indicating that a payment with this QR code will be synchronous and a final status will be provided when the session is claimed. Assumed to be false if absent"
+         "description": "Flag indicating that a payment with this QR code will be synchronous and a final status will be provided when the offer is claimed. Assumed to be false if absent"
       },
       "instrumentTypes": {
          "type": "object",
@@ -93,9 +93,9 @@ Profile specific response schema [JSONSchema]:
 }
 ```
 
-### Session Claim Endpoint
+### Offer Claim Endpoint
 
-The following schemas define the content to be included in the request and response payloads for the session claim endpoint under the ‘profiles’ property.
+The following schemas define the content to be included in the request and response payloads for the offer claim endpoint under the ‘profiles’ property.
 
 The following schema will be included in the request object with an object with the field name of the *Code Consumer Profile URN*.
 
@@ -104,7 +104,7 @@ Profile specific request schema [JSONSchema]:
 ```json
 {
    "$schema": "http://json-schema.org/draft-07/schema",
-   "$id": "https://cds-au/qr/pos-wallet/1/request/session/claim",
+   "$id": "https://cds-au/qr/pos-wallet/1/request/offer/claim",
    "type": "object",
    "additionalProperties": false,
    "required": [
@@ -126,7 +126,7 @@ Profile specific request schema [JSONSchema]:
          "properties": {
             "type": {
                "type": "string",
-               "description": "The type of the instrument to be used for the payment. Additional fields such as tokens or identifiers will be included as defined for the specific instrument type. The instrument type must be one of the types indicated as being supported in the provider discovery document and in the response to a call to session info"
+               "description": "The type of the instrument to be used for the payment. Additional fields such as tokens or identifiers will be included as defined for the specific instrument type. The instrument type must be one of the types indicated as being supported in the provider discovery document and in the response to a call to offer info"
             }
          }
       }
@@ -141,7 +141,7 @@ Profile specific response schema [JSONSchema]:
 ```json
 {
    "$schema": "http://json-schema.org/draft-07/schema",
-   "$id": "https://cds-au/qr/pos-merchant/1/response/session/claim",
+   "$id": "https://cds-au/qr/pos-merchant/1/response/offer/claim",
    "type": "object",
    "additionalProperties": true,
    "required": [
@@ -322,7 +322,7 @@ Profile specific response schema [JSONSchema]:
 
 ## Code Provider Callback
 
-Code Providers which support the Point of Sale Payment MUST be able to callback to a nominated Code Consumer endpoint when information about a claimed Session changes.
+Code Providers which support the Point of Sale Payment MUST be able to callback to a nominated Code Consumer endpoint when information about a Session changes.
 
 Code Consumers can optionally include a ‘callbackUri’ within their discovery document. If this value is set the Code Provider MUST send callback requests. The ‘callbackUri’ can be found in the Code Consumer profile with the *Code Provider Profile URN*.
 
@@ -346,7 +346,7 @@ The supported discovery properties are:
 |----------|-------------|-------------|
 |loyaltyPrograms|OPTIONAL|Array of strings indicating the loyalty programs supported for payments.  The values in the array are string indicators nominated by the loyalty program organisation.|
 |instrumentTypes|OPTIONAL|Map indicating the types of payment instruments supported by the code provider.  The keys in the map are string indicators nominated by the organisation that manages the instrument type. Keys follow a URN format and support versions. Metadata about the instrument type may be included in the mapped value object.|
-|callbackUri|OPTIONAL|A URL where the wallet can receive status callbacks. If supplied the merchant should send a POST request to this URL using the ‘Session Status’ schema whenever information about a session is changed.|
+|callbackUri|OPTIONAL|A URL where the wallet can receive status callbacks. If supplied the merchant should send a POST request to this URL using the ‘Session Status’ schema whenever information about a Session is changed.|
 
 ## Code Consumer Endpoints
 
