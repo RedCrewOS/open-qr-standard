@@ -1,4 +1,3 @@
-
 # Open QR Standard
 
 **An open standard for the publication of interoperable QR codes for payments and other use cases**
@@ -15,7 +14,7 @@ This document defines a standard for the publication and use of QR Codes between
 
 The use of QR Codes to facilitate a range of user journeys is now ubiquitous and has good understanding and acceptance amongst consumers.  Support for the launching of applications using QR Codes is also available on all widely adopted mobile platforms.
 
-QR Codes used via a mobile device usually have tight coupling between the system publishing the QR Code and the system consuming the QR Code.  The ability for a QR Code to be scanned, interpreted and used by an arbitrary client without a pre-existing relationship with the publisher is less common.
+QR Codes used via a mobile device usually have tight coupling between the system publishing the QR Code and the system consuming the contents of the QR Code.  The ability for a QR Code to be scanned, interpreted and used by an arbitrary client without a pre-existing relationship with the publisher is less common.
 
 For some use cases, such as point of sale payments, this limits value and results in proprietary silos.
 
@@ -142,7 +141,7 @@ The detailed requirements for these endpoints are defined in the [Core QR Profil
 
 ## Code Provider Capability Discovery
 
-The Code Provider MUST make a static JSON [RFC8529] file available at:
+The Code Provider MUST make a static JSON [RFC8259] file available at:
 
 `https://<provider base>/.discovery.json`
 
@@ -181,7 +180,7 @@ Non-normative example of a code provider discovery file:
 
 ## Code Consumer Capability Discovery
 
-The Code Consumer MUST make a static JSON [RFC8529] file available at:
+The Code Consumer MUST make a static JSON [RFC8259] file available at:
 
 `https://<consumer base>/.discovery.json`
 
@@ -201,7 +200,7 @@ To allow for increased trust a central authority may optionally be used by the p
 
 A central authority would implement registration processes and policies to ensure trust at their own discretion.
 
-To act as a central authority and advertise the entities that they have registered they MUST make a static JSON [RFC8529] file available at:
+To act as a central authority and advertise the entities that they have registered they MUST make a static JSON [RFC8259] file available at:
 
 `https://<authority base>/.authority.json`
 
@@ -248,7 +247,7 @@ Currently defined profiles:
 |-------|-----------|
 |[RFC2119]|Bradner, S, "Key words for use in RFCs to Indicate Requirement Levels", [RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119), March 1997.|
 |[ISO18004]|ISO/IEC JTC 1/SC 31, "ISO/IEC 18004:2015 Information technology - Automatic identification and data capture techniques - QR Code bar code symbology specification", [ISO/IEC 18004:2015](https://www.iso.org/standard/62021.html), February 2015.|
-|[RFC8529]|Bray, T., Ed., "The JavaScript Object Notation (JSON) Data Interchange Format", [RFC 8259](https://datatracker.ietf.org/doc/html/rfc8259), December 2017.|
+|[RFC8259]|Bray, T., Ed., "The JavaScript Object Notation (JSON) Data Interchange Format", [RFC 8259](https://datatracker.ietf.org/doc/html/rfc8259), December 2017.|
 
 ## Informative References
 
