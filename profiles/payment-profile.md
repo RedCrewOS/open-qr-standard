@@ -106,12 +106,12 @@ Profile specific request schema [JSONSchema]:
    "$schema": "http://json-schema.org/draft-07/schema",
    "$id": "https://cds-au/qr/pos-wallet/1/request/session/claim",
    "type": "object",
+   "additionalProperties": false,
+   "required": [
+     "customerId",
+     "instrument"
+   ],
    "properties": {
-      "additionalProperties": false,
-      "required": [
-         "customerId",
-         "instrument"
-      ],
       "customerId": {
          "type": "string",
          "description": "Identifier of the customer for the payment"
@@ -143,12 +143,12 @@ Profile specific response schema [JSONSchema]:
    "$schema": "http://json-schema.org/draft-07/schema",
    "$id": "https://cds-au/qr/pos-merchant/1/response/session/claim",
    "type": "object",
+   "additionalProperties": true,
+   "required": [
+     "merchantId",
+     "status"
+   ],
    "properties": {
-      "additionalProperties": true,
-      "required": [
-         "merchantId",
-         "status"
-      ],
       "merchantId": {
          "type": "string",
          "description": "Identifier of the merchant for the payment"
