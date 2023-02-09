@@ -51,8 +51,11 @@ An example sequence of activity supported by this standard is as follows ([PNG v
       | QR Code Issued                                |                                              |            |
       |--------------------------------------------------------------------------------------------->|            |
       |                                               |                                              |            |
-      | New QR Code Issued                            |                                              |            |
+      | (optional: Transitory QR Codes) New QR Code Issued                                           |            |
       |--------------------------------------------------------------------------------------------->|            |
+      |                                               | -------------------------------------\       |            |
+      |                                               |-| Consumer scans QR Code with device |       |            |
+      |                                               | |------------------------------------|       |            |
       |                                               |                                              |            |
       |                                               | QR Code Scanned                              |            |
       |                                               |--------------------------------------------->|            |
@@ -90,7 +93,7 @@ An example sequence of activity supported by this standard is as follows ([PNG v
       |                          |                    |                                              |            |
       |<--------------------------                    |                                              |            |
       |                                               |                                              |            |
-      | Validate the Consumer certification           |                                              |            |
+      | (optional: Use of Central Authority) Validate the Consumer certification                     |            |
       |---------------------------------------------------------------------------------------------------------->|
       |                                               |                                              |            |
       | Provide details of session                    |                                              |            |
