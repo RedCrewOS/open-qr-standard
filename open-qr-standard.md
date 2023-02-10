@@ -162,7 +162,7 @@ The Code Provider MUST make a static JSON [RFC8259] file available at:
 
 where `<provider base>` is the same path that appears in the QR Code.
 
-Note that `<provider base>` MUST be communicated to the Code Consumer as the client identifier when calling any endpoint hosted by the Code Consumer in the “Client-ID” http header.
+Note that `<provider base>` MUST be communicated to the Code Consumer as the client identifier when calling any endpoint hosted by the Code Consumer in the “X-Client-ID” http header.
 
 This discovery file will contain details to be used for security, communicating supported capability and providing locations of profile specific endpoints.
 
@@ -199,7 +199,7 @@ The Code Consumer MUST make a static JSON [RFC8259] file available at:
 
 `https://<consumer base>/.discovery.json`
 
-where `<consumer base>` is a path that MUST be communicated to the Code Provider as the client identifier when calling any endpoint hosted by the Code Provider in the “Client-ID” http header.
+where `<consumer base>` is a path that MUST be communicated to the Code Provider as the client identifier when calling any endpoint hosted by the Code Provider in the “X-Client-ID” http header.
 
 This discovery file will contain details to be used for security, communicating supported capability and providing locations of profile specific endpoints.
 
