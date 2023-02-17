@@ -37,7 +37,7 @@ The supported discovery properties are:
 
 ### Offer Info Endpoint
 
-An API used to obtain information about the Offer associated with a nominated QR ID.
+An API used to obtain information about the Offer associated with a nominated Offer ID.
 
 #### HTTP Method
 
@@ -47,13 +47,13 @@ GET
 
 | Parameter | Optionality | Description |
 |-----------|-------------|-------------|
-|qr-id|REQUIRED|The QR ID that information is requested for.|
+|offer-id|REQUIRED|The Offer ID that information is requested for.|
 
 #### Error Responses
 
 HTTP Status: 401, Validation of the provided authorisation JWT failed
 
-HTTP Status: 422, The provided QR ID is not known
+HTTP Status: 422, The provided Offer ID is not known
 
 #### Successful Response
 
@@ -85,7 +85,7 @@ Successful response schema [JSONSchema]:
          "properties": {
             "qrId": {
                "type": "string",
-               "description": "The qr-id that the information was requested for"
+               "description": "The offer-id that the information was requested for"
             },
             "provider": {
                "type": "string",
@@ -107,11 +107,11 @@ Successful response schema [JSONSchema]:
             "expiryTime": {
                "type": "string",
                "format": "date-time",
-               "description": "The expiry time of the QR code.  After this time the qr-id cannot be used to claim a session "
+               "description": "The expiry time of the QR code.  After this time the offer-id cannot be used to claim a session "
             },
             "profiles": {
                "type": "object",
-               "description": "An object with details for each of the qr profiles supported by this qr-id.  Each property of this object uses the urn of the profile and contains properties defined by the qr profile that the urn denotes",
+               "description": "An object with details for each of the qr profiles supported by this offer-id.  Each property of this object uses the urn of the profile and contains properties defined by the qr profile that the urn denotes",
                "additionalProperties": false,
                "patternProperties": {
                   "^urn:.*$": {
@@ -133,7 +133,7 @@ Successful response schema [JSONSchema]:
 
 ### Offer Claim Endpoint
 
-An API used to claim an offer and establish a session under a specific QR Profile using a nominated QR ID.
+An API used to claim an offer and establish a session under a specific QR Profile using a nominated Offer ID.
 
 #### HTTP Method
 
@@ -143,7 +143,7 @@ POST
 
 | Parameter | Optionality | Description |
 |-----------|-------------|-------------|
-|qr-id|REQUIRED|The QR ID that an offer is to be claimed for.|
+|offer-id|REQUIRED|The Offer ID that an offer is to be claimed for.|
 
 #### Request
 
@@ -182,7 +182,7 @@ Request schema [JSONSchema]:
             },
             "profiles": {
                "type": "object",
-               "description": "An object with details for each of the qr profiles supported by this qr-id.  Each property of this object uses the urn of the profile and contains properties defined by the qr profile that the urn denotes",
+               "description": "An object with details for each of the qr profiles supported by this offer-id.  Each property of this object uses the urn of the profile and contains properties defined by the qr profile that the urn denotes",
                "additionalProperties": false,
                "patternProperties": {
                   "^urn:.*$": {
@@ -204,11 +204,11 @@ Request schema [JSONSchema]:
 
 #### Error Responses
 
-HTTP Status: 400, The specified QR Profile is not supported for this QR ID or the data provided was not valid
+HTTP Status: 400, The specified QR Profile is not supported for this Offer ID or the data provided was not valid
 
 HTTP Status: 401, Validation of the provided authorisation JWT failed
 
-HTTP Status: 422, The provided QR ID is not known
+HTTP Status: 422, The provided Offer ID is not known
 
 #### Successful Response
 
@@ -248,7 +248,7 @@ Successful response schema [JSONSchema]:
             },
             "profiles": {
                "type": "object",
-               "description": "An object with details for each of the qr profiles supported by this qr-id.  Each property of this object uses the urn of the profile and contains properties defined by the qr profile that the urn denotes",
+               "description": "An object with details for each of the qr profiles supported by this offer-id.  Each property of this object uses the urn of the profile and contains properties defined by the qr profile that the urn denotes",
                "additionalProperties": false,
                "patternProperties": {
                   "^urn:.*$": {
@@ -286,7 +286,7 @@ GET
 
 HTTP Status: 401, Validation of the provided authorisation JWT failed
 
-HTTP Status: 422, The provided QR ID is not known
+HTTP Status: 422, The provided Offer ID is not known
 
 #### Successful Response
 
@@ -326,7 +326,7 @@ Successful response schema [JSONSchema]:
             },
             "profiles": {
                "type": "object",
-               "description": "An object with details for each of the qr profiles supported by this qr-id.  Each property of this object uses the urn of the profile and contains properties defined by the qr profile that the urn denotes",
+               "description": "An object with details for each of the qr profiles supported by this offer-id.  Each property of this object uses the urn of the profile and contains properties defined by the qr profile that the urn denotes",
                "additionalProperties": false,
                "patternProperties": {
                   "^urn:.*$": {
