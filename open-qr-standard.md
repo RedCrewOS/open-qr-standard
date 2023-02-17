@@ -2,7 +2,7 @@
 
 **An open standard for the publication of interoperable QR codes for payments and other use cases**
 
-**DRAFT**: v0.1.0
+**DRAFT**: v1.0.0
 
 **Authors**:	James Bligh, Kareem Al-Bassam, Jack Moggach
 
@@ -33,6 +33,8 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 |Code Provider|The system that represents the initiating side of the user journey.  This is the system that creates and publishes the QR Code.  For a point-of-sale payment this would be the merchant checkout system.|
 |Code Consumer|The system that represents the acceptance, or client, side of the user journey.  This is the system that scans and processes the QR Code.  For a point-of-sale payment this would be the customer’s mobile wallet application.|
 |QR Profile|A profile for defining the format of the various actions and meta data that can be transferred using this standard for a specific type of use case or user journey.|
+|Offer|Details about an offer that may be claimed by a QR Consumer.  Includes information about the profiles and capabilities associated with a specific QR Code.|
+|Session|An established connection (a claim on an Offer) between a QR Provider and a QR Consumer.|
 
 ## Generic Sequence Diagram
 
@@ -79,7 +81,7 @@ An example sequence of activity supported by this standard is as follows ([PNG v
       |                                               |                              |               |            |
       |                                               |<------------------------------               |            |
       |                                               |                                              |            |
-      |                    Request details of session |                                              |            |
+      |                      Request details of Offer |                                              |            |
       |<----------------------------------------------|                                              |            |
       |                                               |                                              |            |
       | Consumer capabilities from discovery          |                                              |            |
@@ -96,15 +98,15 @@ An example sequence of activity supported by this standard is as follows ([PNG v
       | (optional: Use of Central Authority) Validate the Consumer certification                     |            |
       |---------------------------------------------------------------------------------------------------------->|
       |                                               |                                              |            |
-      | Provide details of session                    |                                              |            |
+      | Provide details of Offer                      |                                              |            |
       |---------------------------------------------->|                                              |            |
       |                                               |                                              |            |
-      |                                               | Validate session type is supported           |            |
-      |                                               |-----------------------------------           |            |
-      |                                               |                                  |           |            |
-      |                                               |<----------------------------------           |            |
+      |                                               | Validate Offer type is supported             |            |
+      |                                               |---------------------------------             |            |
+      |                                               |                                |             |            |
+      |                                               |<--------------------------------             |            |
       |                                               |                                              |            |
-      |           "Claim" session and provide details |                                              |            |
+      |           "Claim" Session and provide details |                                              |            |
       |<----------------------------------------------|                                              |            |
       |                                               |                                              |            |
       | Callback to indicate journey completion       |                                              |            |
@@ -118,23 +120,33 @@ The Code Provider will publish a QR Code that MUST conform with the requirements
 
 This QR Code MUST contain a URL in the following format:
 
-`https://<provider base>/<QR ID>`
+`https://<provider base>/<Offer ID>`
 
 The Code Provider MUST provide a valid web page at the location specified by `<provider base>` with instructions for a user how the QR Code can be successfully used.
 
-The `<QR ID>` is used to obtain access to a data entity held by the Code Provider referred to in this standard as a session.  QR IDs MAY be single or multiple use depending on the use case being supported.
-
-Sessions MUST be single use.
+The `<Offer ID>` is used to obtain access to a data entity held by the Code Provider referred to in this standard as an `Offer`.  Offer IDs MAY be single or multiple use depending on the use case being supported.
 
 The Code Provider SHOULD superimpose a logo on the QR code to help Customers recognise trusted brands.  This logo SHOULD be tested to ensure the logo does not introduce too much error to the QR Code and the QR Code remains readable. In situations where the effect of scanning a QR code is unclear the Code Provider SHOULD provide guidance as to how the QR Code can be successfully used.
 
-## Session Actions
+## Offers
 
-The Code Provider MUST support a Session Info endpoint that the Code Consumer can call to obtain information about the session using the QR ID obtained from the QR Code.  This endpoint SHOULD be idempotent and should not have side effects on the underlying Session.
+An Offer is the information associated with a specific QR Code that represnts the profiles that the QR Code allows access to.  A Code Consumer obtains the Offer information for a QR Code and then determines how to proceed based on the information the Offer contains and what there service supports.
 
-The Code Provider MUST support a Session Claim endpoint that the Code Consumer can use to claim a session for use using a QR ID.  This endpoint MUST provide a unique Session ID that can be used for subsequent interactions.
+Offers MAY be single use or MAY be multi-use.
 
-The Code Provider MUST support a Session Status endpoint to identify the status of a session using a Session ID.
+## Sessions
+
+After obtaining the Offer information a Code Consumer may claim that Offer.  This will result in a Session being established between the Code Provider and the Code Consumer with the Code Provider being the owner of the Session.
+
+Sessions MUST be single use.
+
+## Offer and Session Endpoints
+
+The Code Provider MUST support an Offer Info endpoint that the Code Consumer can call to obtain information about the Offer using the Offer ID obtained from the QR Code.  This endpoint SHOULD be idempotent and should not have side effects on the underlying Offer.
+
+The Code Provider MUST support an Offer Claim endpoint that the Code Consumer can use to claim a Offer for use using a Offer ID and thus establishing a Session.  This endpoint MUST provide a unique Session ID that can be used for subsequent interactions.
+
+The Code Provider MUST support a Session Status endpoint to identify the status of a Session using a Session ID.
 
 The Code Provider MUST support the ability to perform a callback to the Code Consumer when the status of the Session changes.
 

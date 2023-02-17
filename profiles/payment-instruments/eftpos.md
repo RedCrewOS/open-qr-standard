@@ -7,7 +7,7 @@ This payment instrument definition relies upon the [Point-of-sale Payment Profil
 
 Support for this payment instrument is optional.
 
-**DRAFT**: v0.0.4
+**DRAFT**: v0.0.5
 
 **Authors**: Jack Moggach
 
@@ -39,9 +39,9 @@ The supported properties are:
 | cardSupported  | REQUIRED    | Boolean flag indicating if the Code Provider supports payment via card details.                                         |
 | tokenSupported | REQUIRED    | Boolean flag indicating if the Code Provider supports payment via an Eftpos card formtoken.                             |
 
-#### Session Info Endpoint
+#### Offer Info Endpoint
 
-The following schema defines the content to be returned by the Code Provider in a request to the session info endpoint. This information will be included in the **urn:cds-au:qr:pos-merchant:1** 'profile' property within the 'instrumentTypes' section.
+The following schema defines the content to be returned by the Code Provider in a request to the offer info endpoint. This information will be included in the **urn:cds-au:qr:pos-merchant:1** 'profile' property within the 'instrumentTypes' section.
 
 This schema will be returned with an object with the field name of:
 
@@ -52,7 +52,7 @@ Response Schema [json-schema]:
 ```json
 {
    "$schema": "http://json-schema.org/draft-07/schema",
-   "$id": "https://cds-au/qr/pos-instrument/eftpos/1/response/session/info",
+   "$id": "https://cds-au/qr/pos-instrument/eftpos/1/response/offer/info",
    "type": "object",
    "additionalProperties": false,
    "required": [
@@ -61,15 +61,15 @@ Response Schema [json-schema]:
    "properties": {
       "3dsEnabled": {
          "type": "boolean",
-         "description": "Is 3DS enabled for the given session? This value does not indicate whether or not a 3DS challenge will be triggered - only that it may be triggered."
+         "description": "Is 3DS enabled for the given offer? This value does not indicate whether or not a 3DS challenge will be triggered - only that it may be triggered."
       }
    }
 }
 ```
 
-#### Session Claim Endpoint
+#### Offer Claim Endpoint
 
-The following schema defines the content to be returned by the Code Provider in a request to the session claim endpoint. This information will be included in the **urn:cds-au:qr:pos-merchant:1** ‘profile’ property within the ‘instrumentTypes’ section.
+The following schema defines the content to be returned by the Code Provider in a request to the offer claim endpoint. This information will be included in the **urn:cds-au:qr:pos-merchant:1** ‘profile’ property within the ‘instrumentTypes’ section.
 
 This schema will be returned with an object with the field name of:
 
@@ -86,7 +86,7 @@ Request Schema [json-schema]:
 ```json
 {
    "$schema": "http://json-schema.org/draft-07/schema",
-   "$id": "https://cds-au/qr/pos-instrument/eftpos/1/request/session/claim",
+   "$id": "https://cds-au/qr/pos-instrument/eftpos/1/request/offer/claim",
    "type": "object",
    "additionalProperties": false,
    "required": [],
@@ -100,7 +100,7 @@ Response Schema [json-schema]:
 ```json
 {
    "$schema": "http://json-schema.org/draft-07/schema",
-   "$id": "https://cds-au/qr/pos-instrument/eftpos/1/response/session/claim",
+   "$id": "https://cds-au/qr/pos-instrument/eftpos/1/response/offer/claim",
    "type": "object",
    "additionalProperties": false,
    "required": [
